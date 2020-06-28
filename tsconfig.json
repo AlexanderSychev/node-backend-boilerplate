@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "rootDir": "src",
+        "outDir": "dist",
+        "target": "ESNext",
+        "sourceMap": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "module": "CommonJS",
+        "moduleResolution": "Node",
+        "baseUrl": "./src",
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "allowSyntheticDefaultImports": true,
+        "skipLibCheck": true,
+        "importHelpers": true,
+        "resolveJsonModule": true,
+        "paths": {
+            "@core": ["core"],
+            "@infrastructure/Log": ["infrastructure/Log"],
+            "@infrastructure/Config": ["infrastructure/Config"],
+            "@infrastructure/Http": ["infrastructure/Http"],
+            "@domain/Controllers": ["domain/Controllers"]
+        }
+    }
+}

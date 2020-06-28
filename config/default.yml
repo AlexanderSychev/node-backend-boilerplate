@@ -1,0 +1,18 @@
+server:
+    host: '0.0.0.0'
+    port: 3000
+db:
+    host: 'localhost'
+    port: 5432
+    database: 'node_backend_boilerplate'
+    username: 'john_doe'
+    password: '123qwe'
+log:
+    level: 'all'
+    loggers:
+        - name: 'default'
+          type: 'console'
+        - name: 'database'
+          type: 'console'
+        - name: 'http'
+          type: 'console'
