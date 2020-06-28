@@ -7,7 +7,7 @@ import { ServerConfig, IServerConfig } from '@infrastructure/Config';
 import { DefaultLog } from '@infrastructure/Log';
 import { Controllers } from '@domain/Controllers';
 
-import middlewares from './middlewares';
+import middlewares, { NotFoundMiddleware } from './middlewares';
 import { IServer } from './meta';
 
 @injectable()
@@ -27,7 +27,10 @@ export default class Server implements IServer {
         this.app = createExpressServer({
             middlewares,
             controllers: this.controllers,
+            defaultErrorHandler: false,
         });
+        this.app.use(NotFoundMiddleware); // Common 404 handler always must be the last
+
         this.app.listen(this.config.port, this.config.host, () => {
             this.logger.info(`Server started at ${this.config.host}:${this.config.port}`);
         });
