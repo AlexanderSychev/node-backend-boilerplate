@@ -1,0 +1,13 @@
+version: "3.3"
+services:
+    database:
+        image: postgres:12.3-alpine
+        restart: always
+        environment:
+            - POSTGRES_USER=john_doe
+            - POSTGRES_PASSWORD=123qwe
+    app:
+        build:
+            context: .
+        ports:
+            - 3000:3000
