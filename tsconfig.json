@@ -20,6 +20,7 @@
             "@infrastructure/Log": ["infrastructure/Log"],
             "@infrastructure/Config": ["infrastructure/Config"],
             "@infrastructure/Http": ["infrastructure/Http"],
+            "@infrastructure/Db": ["infrastructure/Db"],
             "@domain/Controllers": ["domain/Controllers"]
         }
     }

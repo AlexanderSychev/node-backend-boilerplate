@@ -23,7 +23,7 @@ export default class Server implements IServer {
     @inject(Controllers)
     private controllers: Function[];
 
-    public start() {
+    public start(): Promise<void> {
         this.app = createExpressServer({
             middlewares,
             controllers: this.controllers,
@@ -31,8 +31,13 @@ export default class Server implements IServer {
         });
         this.app.use(NotFoundMiddleware); // Common 404 handler always must be the last
 
-        this.app.listen(this.config.port, this.config.host, () => {
-            this.logger.info(`Server started at ${this.config.host}:${this.config.port}`);
-        });
+        return new Promise<void>(resolve => this.app.listen(
+            this.config.port,
+            this.config.host,
+            () => {
+                this.logger.info(`Server started at ${this.config.host}:${this.config.port}`);
+                resolve();
+            })
+        );
     }
 }

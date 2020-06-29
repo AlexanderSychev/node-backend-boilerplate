@@ -6,7 +6,9 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "node dist/index.js"
+    "start": "node dist/index.js start",
+    "migrate": "node dist/index.js migrate",
+    "revert": "node dist/index.js revert"
   },
   "dependencies": {
     "autobind-decorator": "2.4.0",

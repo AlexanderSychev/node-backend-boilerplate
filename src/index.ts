@@ -1,17 +1,38 @@
 import './bootstrap';
 
+import { Command } from 'commander';
 import { Application, container } from '@core';
 import Http, { Server, IServer } from '@infrastructure/Http';
+import Db, { MainDatabaseConnector, IDbConnector } from '@infrastructure/Db'
 
-function onSuccess() {
-    const server = container.get<IServer>(Server)
-    server.start();
-}
+const app = new Application([Db, Http]);
+const cli = new Command();
 
-function onFailure(err: any) {
-    console.error(err);
-    process.exit(1);
-}
+cli
+    .command('start')
+    .description('Start server')
+    .action(async () => {
+        await app.bootstrap();
+        const server = container.get<IServer>(Server);
+        await server.start();
+    });
 
-const app = new Application(Http);
-app.bootstrap().then(onSuccess, onFailure);
+cli
+    .command('migrate')
+    .description('Run all pending migrations')
+    .action(async () => {
+        await app.bootstrap();
+        const connector = container.get<IDbConnector>(MainDatabaseConnector);
+        await connector.migrate();
+    });
+
+cli
+    .command('revert [count]')
+    .description('Revert [count] last migrations')
+    .action(async (count?: number) => {
+        await app.bootstrap();
+        const connector = container.get<IDbConnector>(MainDatabaseConnector);
+        await connector.revert(count);
+    });
+
+cli.parse(process.argv);
