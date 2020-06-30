@@ -1,4 +1,4 @@
-import knex from 'knex';
+import * as knex from 'knex';
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
 export default abstract class Migration implements MigrationInterface {
@@ -7,8 +7,8 @@ export default abstract class Migration implements MigrationInterface {
 
     /**
      * @param timestamp
-     * @param forConnector 
-     * @param dbms 
+     * @param forConnector
+     * @param dbms
      */
     protected constructor(dbms: string) {
         this.knex = knex({ client: dbms });

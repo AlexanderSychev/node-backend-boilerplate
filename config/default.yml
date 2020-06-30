@@ -2,7 +2,7 @@ server:
     host: '0.0.0.0'
     port: 3000
 db:
-    host: 'localhost'
+    host: 'database'
     port: 5432
     database: 'node_backend_boilerplate'
     username: 'john_doe'

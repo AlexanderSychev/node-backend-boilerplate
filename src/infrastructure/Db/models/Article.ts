@@ -16,6 +16,12 @@ export default class Article {
     @Column({ name: 'created_at' })
     public createdAt: Date;
 
+    @Column({ name: 'updated_at' })
+    public updatedAt: Date;
+
+    @Column({ name: 'author_id' })
+    public authorId: number;
+
     @ManyToOne(_ => User, user => user.articles)
     public author: User;
 }

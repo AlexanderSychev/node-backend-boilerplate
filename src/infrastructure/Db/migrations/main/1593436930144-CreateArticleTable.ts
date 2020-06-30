@@ -1,15 +1,9 @@
 import knex from 'knex';
 import { QueryRunner } from 'typeorm';
 
-import Migration from './Migration';
+import Migration from '../Migration';
 
-export default class CreateArticleTable extends Migration {
-    /** Migration creation date (for execution order) */
-    public static readonly timestamp: number = 1593436930144;
-
-    /** Name of target "IDbConnector" instance */
-    public static readonly target: string = 'main';
-
+export default class CreateArticleTable1593436930144 extends Migration {
     public constructor() {
         super('pg');
     }
@@ -20,6 +14,7 @@ export default class CreateArticleTable extends Migration {
             builder.string('title', 255);
             builder.text('content');
             builder.timestamp('created_at');
+            builder.timestamp('updated_at');
             builder.bigInteger('author_id').references('id').inTable('users');
         });
         await runner.query(query.toString());

@@ -20,4 +20,4 @@ RUN cd /opt/app && yarn install --production=true
 # Forwarding 3000 TCP Port
 EXPOSE 3000
 
-CMD [ "yarn", "start" ]
+CMD [ "yarn", "start:docker" ]

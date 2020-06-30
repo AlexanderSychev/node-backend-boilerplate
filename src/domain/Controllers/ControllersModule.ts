@@ -1,7 +1,8 @@
 import { Container } from 'inversify';
 import { ApplicationModule } from '@core';
 
-import HelloController from './HelloController';
+import ArticleController from './ArticleController';
+import UserController from './UserController';
 
 export const Controllers = Symbol('Controllers');
 
@@ -10,7 +11,10 @@ export default class ControllersModule extends ApplicationModule {
         super('@domain/Controllers');
     }
 
-    public loadInternal(container: Container) {
-        container.bind<Function[]>(Controllers).toConstantValue([HelloController])
+    public async loadInternal(container: Container) {
+        container.bind<Function[]>(Controllers).toConstantValue([
+            ArticleController,
+            UserController
+        ])
     }
 }

@@ -9,19 +9,10 @@ export default class Application {
     }
 
     public async bootstrap() {
-        this.loadAllModules();
-        await this.initAllModules();
-    }
-
-    private loadAllModules(): void {
+        console.info('Application bootstrap..');
         for (const entryModule of this.entryModules) {
-            entryModule.load(container);
+            await entryModule.load(container);
         }
-    }
-
-    private async initAllModules(): Promise<void> {
-        for (const entryModule of this.entryModules) {
-            await entryModule.init(container);
-        }
+        console.log('Application ready to work');
     }
 }

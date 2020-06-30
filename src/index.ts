@@ -1,4 +1,5 @@
 import './bootstrap';
+import './logUnhandled';
 
 import { Command } from 'commander';
 import { Application, container } from '@core';

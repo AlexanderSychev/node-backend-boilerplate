@@ -10,7 +10,7 @@ export default class Db extends ApplicationModule {
         super('@infrastructure/Db', [Config]);
     }
 
-    protected async initInternal(container: Container): Promise<void> {
+    protected async loadInternal(container: Container): Promise<void> {
         container.bind<IDbConnector>(MainDatabaseConnector).to(PostgreSQLDbConnector);
     }
 }

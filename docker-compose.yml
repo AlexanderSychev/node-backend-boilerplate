@@ -1,13 +1,26 @@
 version: "3.3"
 services:
     database:
-        image: postgres:12.3-alpine
-        restart: always
-        environment:
-            - POSTGRES_USER=john_doe
-            - POSTGRES_PASSWORD=123qwe
-    app:
         build:
             context: .
+            dockerfile: database.Dockerfile
+        volumes:
+            - "dbdata:/var/lib/postgresql/data"
+        networks:
+            - node_backend_boilerplate
+        ports:
+            - 5432:5432
+    app:
+        depends_on:
+            - database
+        build:
+            context: .
+            dockerfile: app.Dockerfile
+        networks:
+            - node_backend_boilerplate
         ports:
             - 3000:3000
+volumes:
+    dbdata:
+networks:
+    node_backend_boilerplate:

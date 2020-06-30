@@ -12,7 +12,7 @@ export default class Http extends ApplicationModule {
         super('@infrastructure/Http', [Config, Log, Controllers])
     }
 
-    protected async initInternal(container: Container) {
+    protected async loadInternal(container: Container) {
         container.bind<IServer>(SServer).to(Server);
     }
 }

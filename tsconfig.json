@@ -21,7 +21,9 @@
             "@infrastructure/Config": ["infrastructure/Config"],
             "@infrastructure/Http": ["infrastructure/Http"],
             "@infrastructure/Db": ["infrastructure/Db"],
-            "@domain/Controllers": ["domain/Controllers"]
+            "@domain/Controllers": ["domain/Controllers"],
+            "@domain/Repositories": ["domain/Repositories"],
+            "@domain/UseCases": ["domain/UseCases"]
         }
     }
 }

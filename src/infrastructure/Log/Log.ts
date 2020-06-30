@@ -11,7 +11,7 @@ export default class Log extends ApplicationModule {
         super('@infrastructure/Log', [Config])
     }
 
-    protected async initInternal(container: Container) {
+    protected async loadInternal(container: Container) {
         const config = container.get<ILogConfig>(LogConfig);
 
         const appenders: Dictionary<Appender> = {};

@@ -7,12 +7,14 @@ My personal boilerplate for any pure backend project for Node.JS 12+.
 For application building:
 * Node.JS 12.18.1+;
 * Yarn CLI 1.22.4+ (uses Yarn 2 on project level);
-* GNU Make 4.2.1;
+* GNU Make 4.2.1+;
 
 For application running:
 * Docker 19.03.12+;
 * Docker Compose 1.24.1+;
+
 or:
+
 * Vagrant 2.2.9+ (if your environment doesn't support Docker for some reason);
 
 ## Revert from scratch
@@ -40,6 +42,27 @@ docker-compose up
 
 ## Running with Vagrant
 
+Startup virtual machine:
+
 ```bash
 vagrant up
 ```
+
+Connect to virtual machine:
+```bash
+vagrant ssh
+```
+
+Select shared directory:
+```bash
+cd /opt/node-backend-boilerplate
+```
+
+Run with Docker and Docker Compose:
+```bash
+docker-compose up
+```
+
+## Access to backend
+
+In both cases, backend will be available on `http://localhost:3000`

@@ -13,7 +13,7 @@ export default class Config extends ApplicationModule {
         super('@infrastructure/Config');
     }
 
-    protected async initInternal(container: Container) {
+    protected async loadInternal(container: Container) {
         const loader = new YamlLoader();
         const document = await loader.load();
 

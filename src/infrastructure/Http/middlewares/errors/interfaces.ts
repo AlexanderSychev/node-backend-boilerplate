@@ -10,8 +10,11 @@ export interface IErrorBody<T = {}> {
     details?: T
 }
 
+/** "getBody" method result */
+export type IGetBodyResult<T> = Pick<IErrorBody<T>, 'statusCode' | 'message' | 'details'>;
+
 /** Any error in application which can be transformed into "IErrorBody<T>" interface */
 export interface ITransformableError<T = {}> extends Error {
     /** Returns JSON response body for error (without status message) */
-    getBody(): Pick<IErrorBody<T>, 'statusCode' | 'message' | 'details'>
+    getBody(): IGetBodyResult<T>
 }

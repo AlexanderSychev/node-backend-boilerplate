@@ -13,6 +13,9 @@ export default class User {
     @Column({ name: 'created_at' })
     public createdAt: Date;
 
+    @Column({ name: 'updated_at' })
+    public updatedAt: Date;
+
     @OneToMany(_ => Article, article => article.author)
     public articles: Article[];
 }

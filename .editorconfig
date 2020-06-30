@@ -10,3 +10,6 @@ insert_final_newline = true
 [Makefile]
 indent_style = tab
 charset = utf-8
+
+[.vscode/settings.json]
+insert_final_newline = false

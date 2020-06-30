@@ -1,15 +1,21 @@
 import { inject, injectable } from 'inversify';
+import { Logger } from 'log4js';
 import { createConnection, Connection, ObjectType, EntitySchema, Repository, EntityManager } from 'typeorm';
 import { DBConfig, IDBConfig } from '@infrastructure/Config';
+import { DatabaseLog } from '@infrastructure/Log';
 
-import migrations from './migrations';
+import { main } from './migrations';
 import { IDbConnector } from './meta';
 import { User, Article } from './models';
+import { PostgreSQLDbLogger } from './loggers';
 
 @injectable()
 export default class PostgreSQLDbConnector implements IDbConnector {
     @inject(DBConfig)
     private config: IDBConfig;
+
+    @inject(DatabaseLog)
+    private logger: Logger;
 
     private connection: Connection | null = null;
 
@@ -48,18 +54,21 @@ export default class PostgreSQLDbConnector implements IDbConnector {
         if (!this.connection) {
             this.connection = await createConnection({
                 type: 'postgres',
+                logger: new PostgreSQLDbLogger(this.logger),
                 host: this.config.host,
                 port: this.config.port,
                 database: this.config.database,
                 username: this.config.username,
                 password: this.config.password,
-                migrations: migrations[this.name] || [],
+                migrations: main,
                 entities: [
                     User,
                     Article,
                 ]
             });
-            await this.connection.connect();
+            if (!this.connection.isConnected) {
+                await this.connection.connect();
+            }
         }
         return this.connection;
     }

@@ -8,42 +8,26 @@ export default abstract class ApplicationModule {
 
     private isLoaded: boolean = false;
 
-    private isInitialized: boolean = false;
-
     protected constructor(name: string, dependencies: ApplicationModule[] = []) {
         this.name = name;
         this.dependencies = dependencies;
     }
 
-    /** Load module - sync function to bind all IoC dependencies and load dependent modules */
-    public load(container: Container): void {
+    /** Load module - async function to bind all IoC dependencies and load dependent modules */
+    public async load(container: Container): Promise<void> {
         if (!this.isLoaded) {
+            console.info(`Module "${this.name}" loading...`);
             for (const dependency of this.dependencies) {
-                dependency.load(container);
+                await dependency.load(container);
             }
-            this.loadInternal(container);
+            await this.loadInternal(container);
             this.isLoaded = true;
+            console.info(`Module "${this.name}" loaded.`);
+        } else {
+            console.info(`Module "${this.name}" already loaded, skip it.`);
         }
     }
 
-    public async init(container: Container): Promise<void> {
-        if (this.isLoaded && !this.isInitialized) {
-            for (const dependency of this.dependencies) {
-                await dependency.init(container);
-            }
-            await this.initInternal(container);
-            this.isInitialized = true;
-        } else if (!this.isLoaded) {
-            throw new Error(`Can't initialize module "${this.name}" before it not loaded`);
-        }
-    }
-
-    /** Override this method to bind module's IoC dependencies which not requires async operations */
-    protected loadInternal(_: Container): void {}
-
-    /**
-     * Override this method to bind module's IoC dependencies which requires async operations
-     * or to do some async initializations
-     */
-    protected async initInternal(_: Container): Promise<void> {}
+    /** Override this method to bind module's IoC dependencies */
+    protected abstract loadInternal(container: Container): Promise<void>
 }
