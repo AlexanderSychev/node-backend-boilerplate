@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+
+set -e
+
+# Project's root directory will be working directory, no matter where you run this script
+WORK_DIR=$(dirname $(dirname $(readlink -f $0)))
+cd $WORK_DIR
+
+echo "╔═════════════════════════╗"
+echo "║ DEPLOYMENT v0.0.1-alpha ║"
+echo "╚═════════════════════════╝"
+echo ""
+
+# ------------------------------------------------------------------------------
+# Application building
+# ------------------------------------------------------------------------------
+
+echo "┌─────────────────────────────┐"
+echo "│ STAGE #1: BUILD APPLICATION │"
+echo "└─────────────────────────────┘"
+echo ""
+
+echo "[BUILD APPLICATION] Install project dependencies..."
+yarn install
+echo "[BUILD APPLICATION] Done."
+echo ""
+
+echo "[BUILD APPLICATION] Building project..."
+make
+echo "[BUILD APPLICATION] Done."
+echo ""
+
+# ------------------------------------------------------------------------------
+# Images building
+# ------------------------------------------------------------------------------
+
+echo "┌───────────────────────────────┐"
+echo "│ STAGE #2: BUILD DOCKER IMAGES │"
+echo "└───────────────────────────────┘"
+echo ""
+
+echo "[BUILD DOCKER IMAGES] Building database image..."
+# docker build . -f ./database.Dockerfile -t asychev/node-backend-boilerplate_database
+echo "[BUILD DOCKER IMAGES] Done."
+echo ""
+
+echo "[BUILD DOCKER IMAGES] Building application image..."
+# docker build . -f ./app.Dockerfile -t asychev/node-backend-boilerplate_app
+echo "[BUILD DOCKER IMAGES] Done."
+echo ""
+
+# ------------------------------------------------------------------------------
+# Image publishing
+# ------------------------------------------------------------------------------
+
+echo "┌─────────────────────────────────┐"
+echo "│ STAGE #3: PUBLISH DOCKER IMAGES │"
+echo "└─────────────────────────────────┘"
+echo ""
+
+echo "[PUBLISH DOCKER IMAGES] <NOT IMPLEMENTED YET>"
+echo ""
