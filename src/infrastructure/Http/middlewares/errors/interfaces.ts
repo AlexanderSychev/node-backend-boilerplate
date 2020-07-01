@@ -18,3 +18,9 @@ export interface ITransformableError<T = {}> extends Error {
     /** Returns JSON response body for error (without status message) */
     getBody(): IGetBodyResult<T>
 }
+
+/** Details of parsed native JS Error */
+export interface IParsedErrorDetails {
+    name: string;
+    stack: string[];
+}
