@@ -1,4 +1,4 @@
-import { PrimaryColumn, Column, Entity, ManyToOne } from 'typeorm';
+import { PrimaryColumn, Column, Entity, ManyToOne, JoinColumn } from 'typeorm';
 
 import User from './User';
 
@@ -23,5 +23,6 @@ export default class Article {
     public authorId: number;
 
     @ManyToOne(_ => User, user => user.articles)
+    @JoinColumn({ name: 'author_id' })
     public author: User;
 }

@@ -26,7 +26,7 @@ export default class UserController {
     @Post('/')
     @HttpCode(201)
     public createNewUser(@Body() body: UsernameBody) {
-        this.userUseCases.createNewUser(body.username);
+        return this.userUseCases.createNewUser(body.username);
     }
 
     @Get('/:id(\\d+)')
