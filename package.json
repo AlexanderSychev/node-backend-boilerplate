@@ -22,7 +22,7 @@
     "express": "4.17.1",
     "inversify": "5.0.1",
     "inversify-inject-decorators": "3.1.0",
-    "knex": "0.21.1",
+    "knex": "2.4.0",
     "lodash": "4.17.15",
     "log4js": "6.3.0",
     "pg": "8.2.1",
